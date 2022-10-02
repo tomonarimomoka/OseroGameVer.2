@@ -96,9 +96,6 @@ namespace OseroGameVer._2
                     this.txtAddress.Text = string.Empty;
 
                     PlayerClass.lastHumanAddress = putAddress;
-                    //pic_Board.Invalidate();
-
-                    // this.Close();
                 }
                 else
                 {

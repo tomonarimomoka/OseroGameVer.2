@@ -12,9 +12,6 @@ namespace OseroGameVer._2
 {
     public partial class doSettingForm : Form
     {
-        
-        //string[] modeArray = 
-
         public doSettingForm()
         {
             InitializeComponent();

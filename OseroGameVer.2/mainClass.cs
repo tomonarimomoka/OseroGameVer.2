@@ -62,12 +62,9 @@ namespace OseroGameVer._2
             BaseBoardForm.refleshUI(nowPlayer, mainboard);
             PlayerClass.josekiArray = PlayerClass.INITIA;
             
+            //ユーザーが”後攻”を選んだ時機会に打たせる。
             if (player1.playerType == PlayerClass.AUTO) 
             {
-                //mainboard.Show();
-                //考えてる風にする
-                //System.Threading.Thread.Sleep(3000);
-                //mainboard.Close();
                 putStone(mainboard, player1);
 
                 BaseBoardForm.refleshUI(player2, mainboard);
@@ -106,33 +103,6 @@ namespace OseroGameVer._2
             return someBoard;
         }
 
-        //public static void mainLoop(BaseBoardForm board,PlayerClass player1, PlayerClass  player2)
-        //{
-        //    //board.ShowDialog();
-        //    PlayerClass nowPlayer = player1;
-        //    //board.Refresh();
-        //    for (int i = 0; i < mainClass.SIZE * mainClass.SIZE; i++)
-        //    {
-        //        //UI
-        //        if (nowPlayer.PlayerType == PlayerClass.MANUAL)
-        //        {
-        //            board.label_info.Text = "あなたの番です";
-        //        }
-        //        else 
-        //        {
-        //            board.label_info.Text = "機械の番です";
-        //        }
-        //        board.btn_save.Visible = nowPlayer.SaveVisble;
-        //        board.Refresh();
-
-        //        //プログラム
-        //        if (AIForAll.countBlank() == 0) { break; }
-        //        putStone(board,nowPlayer);
-
-        //        nowPlayer = nowPlayer == player1 ? player2 : player1;
-        //        //board.Refresh();
-        //    }
-        //}
      
 
         public static void putStone(BaseBoardForm board,PlayerClass nowPlayer)
@@ -142,7 +112,6 @@ namespace OseroGameVer._2
                 board.Cursor = Cursors.WaitCursor;
                 //考えてる風にする
                 System.Threading.Thread.Sleep(3000);
-                //Task.Delay(5000);
                 AIFforKikai.putByAout(nowPlayer);
                 board.Cursor = Cursors.Default;
 

@@ -72,6 +72,7 @@ namespace OseroGameVer._2
 				y = y + dirY;
 				if (x < 0 || mainClass.SIZE - 1 < x) { break; }
 				if (y < 0 || mainClass.SIZE - 1 < y) { break; }
+				//Addressを作成
 				tempAddress = coordinateAddress(x, y);
 
 				//空なら抜ける
@@ -90,8 +91,6 @@ namespace OseroGameVer._2
                 else
                 {
 					count++;
-					//もし４つ目の引数にtrueが入っていればひっくり返せすところまでやる
-					//if (returnFlag) { mainClass.boardIdentitiy[address] = nowPlayer.Color; }
 				}
 			}
 

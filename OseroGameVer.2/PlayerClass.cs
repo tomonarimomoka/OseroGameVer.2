@@ -19,18 +19,13 @@ namespace OseroGameVer._2
         public  static int[,] josekiArray ;
         public  bool saveVisble = false;
 
-
         ///const変数       
         public static int AUTO = 1;
         public static int MANUAL = 2;
 
-        //public static int USAGI = 11;
-        //public static int NEZUMI = 12;
-        //public static int USI = 13;
-        //初期設定配列(この配列にいみはない)
+        //初期設定配列(この配列に意味はない)
         public static int[,] INITIA = { {1 ,1 }};
-        //ウサギ配列
-        //int[,] usagiArray = new int[11,11];
+
         public static int[,] USAGI =
         {   { 5, 4 }, //37
             { 3, 5 }, //43
@@ -83,15 +78,6 @@ namespace OseroGameVer._2
                 color = mainClass.SHIRO;
             }
 
-
-            //if (playerType == MANUAL) 
-            //{
-            //    saveVisble = true;
-            //}
-            //else
-            //{
-            //    saveVisble = false;
-            //}
         }
 
         public int PlayerType

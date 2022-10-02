@@ -16,6 +16,7 @@ namespace OseroGameVer._2
             int second = mainClass.SIZE - 1;
             int thard = AIForAll.coordinateAddress(0, mainClass.SIZE - 1);
             int forth = mainClass.SIZE * mainClass.SIZE - 1;
+
             if (AIForAll.allDirReturn(first,false, nowPlayer) > 0)
             {
                 returnNumber = first;
@@ -32,7 +33,6 @@ namespace OseroGameVer._2
             {
                 returnNumber = forth;
             }
-            //mainClass.boardIdentitiy[returnNumber] = PlayerClass.color;
             return returnNumber;
         }
 
@@ -89,10 +89,6 @@ namespace OseroGameVer._2
                             break;
                         case 4:
                             nextAddress = returnAddressByJOSEKI(nowPlayer,arrayCount);
-                            //if(nextAddress == -1) 
-                            //{
-                            //    nextAddress = chukyu(arrayCount);
-                            //}
                             break;
                     }
 
@@ -199,8 +195,6 @@ namespace OseroGameVer._2
             //二次元配列なので、２で÷
             int arraySize = array.Length / 2;
 
-            bool DosePutByJosekiFlag = false;
-
             for (int i = 0; i < arraySize; i++)
             {
                 candidateAddress = AIForAll.coordinateAddress(array[i, 0], array[i, 1]);
@@ -209,12 +203,11 @@ namespace OseroGameVer._2
                 if (mainClass.boardIdentitiy[candidateAddress] == mainClass.KARA 
                     && AIForAll.allDirReturn(candidateAddress, false, nowPlayer) > 0)
                 {
-                    DosePutByJosekiFlag = true;
                     break;
                 }
 
                 //配列が終わってからのコードも
-                if (DosePutByJosekiFlag == false) 
+                if (i == arraySize - 1) 
                 {
                     candidateAddress = -1;
                 }
@@ -290,7 +283,6 @@ namespace OseroGameVer._2
             //もし配列が決まらなければ中級モードで
             if (nextAddress==-1) 
             {
-                //nextAddress = KIAKIrandom(nowPlayer);
                 nextAddress = chukyu(arrayCount);
 
             }
