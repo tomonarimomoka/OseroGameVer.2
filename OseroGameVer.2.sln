@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OseroGameVer.2", "OseroGameVer.2\OseroGameVer.2.csproj", "{81C4773E-3D5D-489F-93B0-DF55E73F0D28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OthelloGame", "OseroGameVer.2\OthelloGame.csproj", "{81C4773E-3D5D-489F-93B0-DF55E73F0D28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

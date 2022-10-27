@@ -24,9 +24,9 @@ namespace OseroGameVer._2.Properties
     internal class Resources
     {
 
-        private static global::System.Resources.ResourceManager resourceMan;
+        private  global::System.Resources.ResourceManager resourceMan;
 
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        private  global::System.Globalization.CultureInfo resourceCulture;
 
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources()
@@ -37,7 +37,7 @@ namespace OseroGameVer._2.Properties
         ///   このクラスで使用されるキャッシュされた ResourceManager インスタンスを返します。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
+        internal  global::System.Resources.ResourceManager ResourceManager
         {
             get
             {
@@ -55,7 +55,7 @@ namespace OseroGameVer._2.Properties
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
+        internal  global::System.Globalization.CultureInfo Culture
         {
             get
             {

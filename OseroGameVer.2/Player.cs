@@ -6,27 +6,28 @@ using System.Threading.Tasks;
 
 namespace OseroGameVer._2
 {
-    public class PlayerClass
+    public class Player
     {
         //実態を2つ作る
         //PLAYER1 と　PLAYER2
         public  int playerType = 0;
         public  int color = 0;
-        public  static bool humanIsFirst = true;
-        public  static int mode = -1;
-        public  static int lastHumanAddress = -1;
-        public  static int josekiType = -1;
-        public  static int[,] josekiArray ;
+        public   bool humanIsFirst = true;
+        public   int mode = -1;
+        public   int lastHumanAddress = -1;
+        public   int josekiType = -1;
+        public   int[,] josekiArray ;
         public  bool saveVisble = false;
 
+
         ///const変数       
-        public static int AUTO = 1;
-        public static int MANUAL = 2;
+        public const int AUTO = 1;
+        public const int MANUAL = 2;
 
         //初期設定配列(この配列に意味はない)
-        public static int[,] INITIA = { {1 ,1 }};
+        public  int[,] INITIA = { {1 ,1 }};
 
-        public static int[,] USAGI =
+        public  int[,] USAGI =
         {   { 5, 4 }, //37
             { 3, 5 }, //43
             { 2, 4 }, //34
@@ -40,7 +41,7 @@ namespace OseroGameVer._2
         };
 
         //牛はいれつ
-        public static int[,] USI =
+        public  int[,] USI =
         {
             { 5,4 }, //37
             { 5,5 }, //45
@@ -54,7 +55,7 @@ namespace OseroGameVer._2
         };
 
         //鼠配列
-        public static int[,] NEZUM =
+        public  int[,] NEZUM =
         {
             { 5,4 }, //37
             { 5,3 }, //29
@@ -64,18 +65,19 @@ namespace OseroGameVer._2
         };
 
         //コンストラクタとは特殊なメソッド
-        public PlayerClass(int num)
+        public Player(int num)
         {
+            Whole whole = new Whole();
             if (num == 1)
             {
-                playerType = humanIsFirst == true ? MANUAL : AUTO;
-                color = mainClass.KURO;
+                //playerType = humanIsFirst == true ? MANUAL : AUTO;
+                color = whole.KURO;
 
             }
             else if(num == 2)
             {
-                playerType = playerType = humanIsFirst == true ? AUTO : MANUAL ;
-                color = mainClass.SHIRO;
+                //playerType = playerType = humanIsFirst == true ? AUTO : MANUAL ;
+                color = whole.SHIRO;
             }
 
         }
@@ -110,7 +112,13 @@ namespace OseroGameVer._2
             get { return josekiArray; }
 
         }
-        
+
+        public int LastHumanAddress
+        {
+            get { return lastHumanAddress; }
+            set { lastHumanAddress = value; }
+        }
+
 
 
     }
