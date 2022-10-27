@@ -132,11 +132,19 @@ namespace OseroGameVer._2
         private void btn_save_Click(object sender, EventArgs e)
         {
             Algorithm alg = new Algorithm(SIZE, boardIdentitiy);
+            Whole whole = new Whole();
+            
+
+            if (this.txtAddress.Text == string.Empty) 
+            {
+                MessageBox.Show("値を入力してください。");
+                return;
+            }
 
             int outAddress;
-            int putAddress = Int32.Parse(this.txtAddress.Text) ;
-            //入力されたテキストが数字以外ならバリデーション
+            int putAddress = Int32.Parse(this.txtAddress.Text);
             if (!int.TryParse(this.txtAddress.Text, out outAddress))
+            //入力されたテキストが数字以外ならバリデーション
             {
                 MessageBox.Show("数字のみを入力してください");
                 return;
@@ -166,11 +174,15 @@ namespace OseroGameVer._2
                 }
                 else
                 {
-                    //一つもひっくり返せる場所がない時置いてよい。
-
-
-                    MessageBox.Show("ひっくり返さない場所にはおけません。");
-                    return;
+                    if (alg.canPassOrNot(nowPlayer)) 
+                    {
+                        MessageBox.Show("ひっくり返せませんが、おける場所がおきます。");
+                    }
+                    else 
+                    {
+                        MessageBox.Show("ひっくり返せない場所には置けません。");
+                        return;
+                    }
                 }
             }
 

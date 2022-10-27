@@ -161,7 +161,27 @@ namespace OseroGameVer._2
 			}
 
 			return count;
-		}
+        }
+
+        //パス出来るか調べてダイアログだす関数
+        public bool canPassOrNot(Player nowPlayer) 
+        {
+            Whole whole = new Whole();
+            string mess = string.Empty;
+            //一つもひっくり返せる場所がない時置いてよい。
+            for (int i = 0; i < SIZE * SIZE; i++)
+            {
+                if (boardIdentitiy[i] == whole.KARA)
+                {
+                    if (allDirReturn(i, false, nowPlayer) != 0)
+                    {
+                        return false ;
+                    }
+                }
+            }
+            return true;
+
+        }
 
         public int CanPutCornerOrNot(Player nowPlayer)
         {
@@ -249,12 +269,24 @@ namespace OseroGameVer._2
                     }
 
                 }
+
+                if (nextAddress == -1)
+                {
+                    if (canPassOrNot(nowPlayer))
+                    {
+                        nextAddress = KIAKIrandom(nowPlayer);
+                    }
+
+                }
             }
             //置ける
             else
             {
                 nextAddress = CanPutCornerOrNot(nowPlayer);
             }
+
+            
+
             boardIdentitiy[nextAddress] = nowPlayer.Color;
             //9/26用回収
             allDirReturn(nextAddress, true, nowPlayer);

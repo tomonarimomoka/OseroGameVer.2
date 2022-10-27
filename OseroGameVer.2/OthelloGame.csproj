@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
-    <Compile Include="AIFforKikai.cs" />
     <Compile Include="BaseBoardForm.cs">
       <SubType>Form</SubType>
     </Compile>
