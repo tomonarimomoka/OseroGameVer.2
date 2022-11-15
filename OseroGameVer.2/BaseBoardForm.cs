@@ -12,94 +12,90 @@ namespace OseroGameVer._2
 {
     partial class BaseBoardForm : Form
     {
-        int SIZE;
-        bool HUMAN_IS_FIRST;
+        //用回収
+        int size;
+        bool fumanIsFirst;
         int[] boardIdentitiy;
         //playerの実体を作る
         Player player1 = new Player(1);
         Player player2 = new Player(2);
         Player nowPlayer;
-        //algorithmの実態を作る
-        //Algorithm alg;
-        public BaseBoardForm(int size , bool humanIsFirst,int mood)
+
+        public BaseBoardForm(int inputSize , bool inputHumanIsFirst,int inputMode)
         {
             InitializeComponent();
-            SIZE = size;
-            HUMAN_IS_FIRST = humanIsFirst;
-            player1.mode = mood;
-            player2.mode = mood;
+            size = inputSize;
+            fumanIsFirst = inputHumanIsFirst;
+            player1.mode = inputMode;
+            player2.mode = inputMode;
 
-            boardIdentitiy = makeBoard(SIZE);
-            //alg = new Algorithm(SIZE, boardIdentitiy);
-            //boardIdentitiy = { SIZE* SIZE};
+            boardIdentitiy = makeBoard(size);
+            
         }
 
 
-        private void BaseForm_Load(object sender, EventArgs e)//, PaintEventArgs e2)
+        private void BaseForm_Load(object sender, EventArgs e)
         {
-            //Whole whole = new Whole();
-            //boardIdentitiy = makeBoard(SIZE);
             nowPlayer = player1;
             //先攻なら、
-            if (HUMAN_IS_FIRST)
+            if (fumanIsFirst)
             {
-                //Player.humanIsFirst = true;
                 player1.playerType = Player.MANUAL;
                 player2.playerType = Player.AUTO;
 
             }
             else 
             {
-                //Player.humanIsFirst = false;
                 player1.playerType = Player.AUTO;
                 player2.playerType = Player.MANUAL;
                 putStone(this, nowPlayer);
                 nowPlayer = nowPlayer == player1 ? player2 : player1;
                 //board.Refresh();
-                refleshUI(nowPlayer, this);
+                //綴り
+                refreshUI(nowPlayer, this);
             }
 
 
-            this.Width = 44 + SIZE * 50;
-            this.Height = SIZE * 50 + 200;
-            pic_Board.Width = 1 + SIZE * 50;
-            pic_Board.Height = 1 + SIZE * 50 ;
+            this.Width = 44 + size * 50;
+            this.Height = size * 50 + 200;
+            pic_Board.Width = 1 + size * 50;
+            pic_Board.Height = 1 + size * 50 ;
 
             txtAddress.Location = new Point(10, pic_Board.Height + 60 + btn_save.Height / 4);
             btn_save.Location = new Point(60, pic_Board.Height + 60);
             label_info.Location = new Point(10, pic_Board.Height + 10);
 
-            refleshUI(nowPlayer,this);
+            refreshUI(nowPlayer,this);
 
 
         }
 
 
         //一回しか使わないのに関数にしてる。
-        private int[] makeBoard(int SIZE)
+        private int[] makeBoard(int size)
         {
             
-            int[] someBoard = new int[SIZE * SIZE];
+            int[] someBoard = new int[size * size];
             Whole whole = new Whole();
-            for (int i = 0; i < SIZE * SIZE; i++)
+            for (int i = 0; i < size * size; i++)
             {
                 someBoard[i] = whole.KARA;
             }
-            Algorithm alg = new Algorithm(SIZE, someBoard);
-            alg.coordinateAddress(SIZE / 2 + 1, SIZE / 2 + 1);
-            //SIZE /2 + 1
+            Algorithm alg = new Algorithm(size, someBoard);
+            alg.coordinateAddress(size / 2 + 1, size / 2 + 1);
+            //size /2 + 1
 
-            someBoard[alg.coordinateAddress(SIZE / 2 - 1, SIZE / 2 - 1)] = whole.SHIRO;
-            someBoard[alg.coordinateAddress(SIZE / 2, SIZE / 2 - 1)] = whole.KURO;
-            someBoard[alg.coordinateAddress(SIZE / 2 - 1, SIZE / 2)] = whole.KURO;
-            someBoard[alg.coordinateAddress(SIZE / 2, SIZE / 2)] = whole.SHIRO;
+            someBoard[alg.coordinateAddress(size / 2 - 1, size / 2 - 1)] = whole.SHIRO;
+            someBoard[alg.coordinateAddress(size / 2, size / 2 - 1)] = whole.KURO;
+            someBoard[alg.coordinateAddress(size / 2 - 1, size / 2)] = whole.KURO;
+            someBoard[alg.coordinateAddress(size / 2, size / 2)] = whole.SHIRO;
             return someBoard;
         }
 
         //location
         private  double[] getLocation(int address)
         {
-            Algorithm alg = new Algorithm(SIZE, boardIdentitiy);
+            Algorithm alg = new Algorithm(size, boardIdentitiy);
             //side(辺)
             int SIDE = 50;
             
@@ -113,8 +109,7 @@ namespace OseroGameVer._2
         }
 
 
-        //要改修
-        public static void refleshUI(Player nowPlayer,BaseBoardForm board) 
+        public static void refreshUI(Player nowPlayer,BaseBoardForm board) 
         {
             //UI
             if (nowPlayer.PlayerType == Player.MANUAL)
@@ -131,7 +126,7 @@ namespace OseroGameVer._2
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            Algorithm alg = new Algorithm(SIZE, boardIdentitiy);
+            Algorithm alg = new Algorithm(size, boardIdentitiy);
             Whole whole = new Whole();
             
 
@@ -149,7 +144,7 @@ namespace OseroGameVer._2
                 MessageBox.Show("数字のみを入力してください");
                 return;
             }
-            else if (!(0 <= putAddress && putAddress <= SIZE * SIZE))
+            else if (!(0 <= putAddress && putAddress <= size * size))
             {
                 MessageBox.Show("入力された数字が範囲外です");
                 return;
@@ -162,21 +157,19 @@ namespace OseroGameVer._2
                     //オセロの盤面に石を置く。
                     boardIdentitiy[putAddress] = nowPlayer.Color;
                     
-                    
-                    
-                   
                     alg.allDirReturn(putAddress, true, nowPlayer);
                     
                     this.txtAddress.Text = string.Empty;
 
-                    
-                    //nowPlayer.LastHumanAddress = putAddress;
                 }
                 else
                 {
                     if (alg.canPassOrNot(nowPlayer)) 
                     {
-                        MessageBox.Show("ひっくり返せませんが、おける場所がおきます。");
+                        MessageBox.Show("ひっくり返せませんが、おける場所がないのでおきます。");
+                        //オセロの盤面に石を置く。
+                        boardIdentitiy[putAddress] = nowPlayer.Color;
+                        this.txtAddress.Text = string.Empty;
                     }
                     else 
                     {
@@ -190,7 +183,7 @@ namespace OseroGameVer._2
             //機械が打つ
             nowPlayer = nowPlayer == player1 ? player2 : player1;
             nowPlayer.LastHumanAddress = putAddress;
-            refleshUI(nowPlayer,this);
+            refreshUI(nowPlayer,this);
             //プログラム
             if (alg.countBlank() != 0) 
             {
@@ -199,7 +192,16 @@ namespace OseroGameVer._2
 
             nowPlayer = nowPlayer == player1 ? player2 : player1;
             //board.Refresh();
-            refleshUI(nowPlayer,this);
+            refreshUI(nowPlayer,this);
+
+
+            //勝敗判定
+            if (alg.countBlank() == 0) 
+            {
+                DialogResult result =  MessageBox.Show(alg.retrunWinOrLossMess()+"\nゲームを終了します。");
+
+                if(result == DialogResult.OK) { this.Close(); }
+            }
 
         }
 
@@ -213,19 +215,19 @@ namespace OseroGameVer._2
             //side(辺)
             int SIDE = 50;
             //x
-            for (int i = 0; i < (SIZE + 1); i++)
+            for (int i = 0; i < (size + 1); i++)
             {
                 var point1 = new Point(0, i * SIDE);
-                var point2 = new Point(SIDE * SIZE, i * SIDE);
+                var point2 = new Point(SIDE * size, i * SIDE);
 
                 e.Graphics.DrawLine(Pens.Black, point1, point2);
 
             }
             //y
-            for (int i = 0; i < (SIZE + 1); i++)
+            for (int i = 0; i < (size + 1); i++)
             {
                 var point1 = new Point(i * SIDE, 0);
-                var point2 = new Point(i * SIDE, SIDE * SIZE);
+                var point2 = new Point(i * SIDE, SIDE * size);
 
                 e.Graphics.DrawLine(Pens.Black, point1, point2);
 
@@ -235,7 +237,7 @@ namespace OseroGameVer._2
             //フォントオブジェクトの作成
             Font fnt = new Font("MS UI Gothic", 25);
 
-            for (int i = 0; i < SIZE * SIZE; i++)
+            for (int i = 0; i < size * size; i++)
             {
                 double[] Location = getLocation(i);
                 float xLocation = (float)Location[0];
@@ -275,8 +277,8 @@ namespace OseroGameVer._2
 
         public void putStone(BaseBoardForm board, Player nowPlayer)
         {
-            Algorithm alg = new Algorithm(SIZE, boardIdentitiy);
-            //Algorithm alg = new Algorithm(SIZE, );
+            Algorithm alg = new Algorithm(size, boardIdentitiy);
+
             if (nowPlayer.PlayerType == Player.AUTO)
             {
                 board.Cursor = Cursors.WaitCursor;

@@ -15,7 +15,6 @@ using System.Windows.Forms;
 //初級モード　一番多くひっくり返す番地におく。
 //中級モード　全体の60%が埋まるまで、機械は０以外の最も少なくひっくり返す場所に置く。おければ4角に置く。
 //上級級モード　帝石？
-//ぴえん＝白　ねこ＝黒
 
 
 //見やすいコードとは　=　変更しやすい。
@@ -26,11 +25,8 @@ namespace OseroGameVer._2
 {
     public class Whole
     {
-        //fainal変数たち
-        //public const int KARA = 0;
-        //public const int SHIRO = 1;
-        //public const int KURO = 2;
-        //public const string BLANK = " ";
+
+        //定数
         public int KARA
         {
             get { return 0; }
@@ -46,12 +42,7 @@ namespace OseroGameVer._2
         }
 
         
-        //public int size = 8;
-
-        //public int Size
-        //{
-        //    get { return size; }
-        //}
+        
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
@@ -60,62 +51,11 @@ namespace OseroGameVer._2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            SettingForm doSet = new SettingForm();
-            Application.Run(doSet);
+
+            SettingForm settingForm = new SettingForm();
+
+            Application.Run(settingForm);
         }
     }
 }
             
-
-            //Application.Run(doSet);
-
-            
-
-        //    BaseBoardForm.refleshUI(nowPlayer, mainboard);
-        //    Player.josekiArray = Player.INITIA;
-            
-        //    //ユーザーが”後攻”を選んだ時機会に打たせる。
-        //    if (player1.playerType == Player.AUTO) 
-        //    {
-        //        putStone(mainboard, player1);
-
-        //        BaseBoardForm.refleshUI(player2, mainboard);
-        //        nowPlayer = player2;
-        //    }
-
-        //    mainboard.ShowDialog();
-        
-        //}
-            
-            //プロパティ
-            //オブジェクト指向
-
-            //モーダルとモーダレス
-            //Windows　マルチスレッド　シングルスレッド
-
-            //複数のものが同時にうごいているように見せかける　プロセス＞スレッド
-            //show showdaialog
-            
-        
-
-
-
-       
-
-     
-
-        //public  void putStone(BaseBoardForm board,Player nowPlayer)
-        //{
-        //    if (nowPlayer.PlayerType == Player.AUTO)
-        //    {
-        //        board.Cursor = Cursors.WaitCursor;
-        //        //考えてる風にする
-        //        System.Threading.Thread.Sleep(2000);
-        //        AIFforKikai.putByAout(nowPlayer);
-        //        board.Cursor = Cursors.Default;
-
-        //    }
-        //    board.Refresh();
-
-        //}
-

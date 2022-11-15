@@ -332,11 +332,11 @@ namespace OseroGameVer._2
             //6割埋まっていない場合
             if (countBlank() >= SIZE * SIZE * 0.6)
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
 
@@ -480,6 +480,44 @@ namespace OseroGameVer._2
 
             return nextAddress;
 
+        }
+
+
+
+        public  string retrunWinOrLossMess()
+        {
+            Whole whole = new Whole();
+            int ShiroCount = 0;
+            int KuroCount = 0;
+            string mess = string.Empty;
+
+            for (int i = 0; i < SIZE * SIZE; i++)
+            {
+                if (boardIdentitiy[i] == whole.SHIRO)
+                {
+                    ShiroCount++;
+                }
+                else if (boardIdentitiy[i] == whole.KURO)
+                {
+                    KuroCount++;
+                }
+            }
+
+            if (ShiroCount > KuroCount)
+            {
+                mess = ShiroCount + "対" + KuroCount + "であなたの勝ちです✨";
+
+            }
+            else if (ShiroCount == KuroCount)
+            {
+                mess = ShiroCount + "対" + KuroCount + "で引き分けです！！";
+            }
+            else
+            {
+                mess = ShiroCount + "対" + KuroCount + "であなたの負けです😢";
+            }
+
+            return mess;
         }
 
     }

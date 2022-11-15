@@ -21,101 +21,62 @@ namespace OseroGameVer._2
         int mood = -1;
 
 
-        //private void btn_save_Click(object sender, EventArgs e)
-        //{
-            
-
-        //    private void cmb_SelectMode_SelectedIndexChanged(object sender, EventArgs e)
-        //    {
-        //        List<string> modeList = new List<string>() { "4×4", "5×5", "6×6", "7×7", "8×8" };
-
-        //        switch (cmb_SelectMode.SelectedIndex)
-        //        {
-        //            case 1:
-        //                mood = 1;
-        //                break;
-        //            case 2:
-        //                mood = 2;
-        //                break;
-        //            case 3:
-        //                mood = 3;
-        //                break;
-        //            case 4:
-        //                mood = 4;
-        //                modeList.RemoveRange(0, 4);
-        //                //cmb_size.Items.AddRange( "8×8");
-        //                break;
-        //        }
-
-        //        cmb_size.Items.Clear();
-        //        cmb_size.Items.AddRange(modeList.ToArray());
-        //        cmb_size.Enabled = true;
-
-        //    }
-
-        //private Button btn_save;
-
         private void btn_save_Click_1(object sender, EventArgs e)
         {
+           
             //初期値として人が先行
             bool humanIsFirst = true;
 
             //先攻なら、
-            if (this.cmb_firstOrSecond.SelectedIndex == 1)
+            if (radio_btn_first.Checked)
             {
                 humanIsFirst = true;
 
-
             }
-            else if (this.cmb_firstOrSecond.SelectedIndex == 2)
+            else if (radio_btn_second.Checked)
             {
                 humanIsFirst = false;
 
             }
 
+            ////用回収
+            ////サイズ
+            //if (cmb_size.SelectedItem == "8×8")
+            //{
+            //    size = 8;
+            //}
+            //else
+            //{
+            //    //if (mood == 4)
+            //    //{
+            //    //    DialogResult result = MessageBox.Show("定石モードは８×８のみでPlayできます。\n サイズを８×８にしますか？", "確認", MessageBoxButtons.YesNo);
+            //    //    if (result == DialogResult.Yes)
+            //    //    {
+            //    //        size = 8;
+            //    //    }
+            //    //    else
+            //    //    {
+            //    //        size = 0;
+            //    //    }
 
-            //サイズ
-            if (cmb_size.SelectedItem == "8×8")
+            //    //}
+            if(tabControl1.SelectedIndex == 3) 
             {
                 size = 8;
             }
             else
             {
-                if (mood == 4)
+                switch (tabControl1.SelectedIndex) 
                 {
-                    DialogResult result = MessageBox.Show("定石モードは８×８のみでPlayできます。\n サイズを８×８にしますか？", "確認", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        size = 8;
-                    }
-                    else
-                    {
-                        size = 0;
-                    }
-
-                }
-                else
-                {
-                    switch (cmb_size.SelectedIndex)
-                    {
-
-                        case 0:
-                            size = 4;
-                            break;
-                        case 1:
-                            size = 5;
-                            break;
-                        case 2:
-                            size = 6;
-                            break;
-                        case 3:
-                            size = 7;
-                            break;
-                            //case 4:
-                            //    mainClass.size = 7;
-                            //    break;
-
-                    }
+                    case 0:
+                        size = checkInputSize(cmb_settai.SelectedIndex);
+                        break;
+                    case 1:
+                        size = checkInputSize(cmb_first.SelectedIndex);
+                        break;
+                    case 2:
+                        size = checkInputSize(cmb_middle.SelectedIndex);
+                        break;
                 }
 
             }
@@ -123,13 +84,9 @@ namespace OseroGameVer._2
 
             if (mood == -1)
             {
-                mood = this.cmb_SelectMode.SelectedIndex;
-                //MessageBox.Show("モードを選択してください。", "確認", MessageBoxButtons.OK);
+                mood = tabControl1.SelectedIndex + 1;  
             }
 
-            //BaseBoardForm board = new BaseBoardForm();
-            //board.refleshUI(nowPlayer, mainboard);
-            //Player.josekiArray = Player.INITIA;
 
             BaseBoardForm baseForm = new BaseBoardForm(size, humanIsFirst, mood);
 
@@ -147,7 +104,8 @@ namespace OseroGameVer._2
 
         private void SettingForm_Load(object sender, EventArgs e)
         {
-
+            cmb_difficlt.SelectedIndex = 0;
+            radio_btn_first.Checked = true;
         }
 
 
@@ -162,32 +120,68 @@ namespace OseroGameVer._2
 
         }
 
-        private void cmb_SelectMode_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            List<string> modeList = new List<string>() {  "4×4", "5×5", "6×6", "7×7", "8×8" };
+        //private void cmb_SelectMode_SelectedIndexChanged_1(object sender, EventArgs e)
+        //{
+        //    List<string> modeList = new List<string>() {  "4×4", "5×5", "6×6", "7×7", "8×8" };
 
-            switch (cmb_SelectMode.SelectedIndex)
+        //    switch (cmb_SelectMode.SelectedIndex)
+        //    {
+        //        case 1:
+        //            size = 1;
+        //            break;
+        //        case 2:
+        //            size = 2;
+        //            break;
+        //        case 3:
+        //            size = 3;
+        //            break;
+        //        case 4:
+        //            size = 4;
+        //            //modeList.Count()
+        //            modeList.RemoveRange(0, modeList.Count()-1);
+        //            //cmb_size.Items.AddRange( "8×8");
+        //            break;
+        //    }
+
+        //    cmb_size.Items.Clear();
+        //    cmb_size.Items.AddRange(modeList.ToArray());
+        //    cmb_size.Enabled = true;
+        //}
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private int checkInputSize(int inputSizeIndex)
+        {
+            switch (inputSizeIndex)
             {
+
+                case 0:
+                    size = 4;
+                    break;
                 case 1:
-                    size = 1;
+                    size = 5;
                     break;
                 case 2:
-                    size = 2;
+                    size = 6;
                     break;
                 case 3:
-                    size = 3;
+                    size = 7;
                     break;
                 case 4:
-                    size = 4;
-                    //modeList.Count()
-                    modeList.RemoveRange(0, modeList.Count()-1);
-                    //cmb_size.Items.AddRange( "8×8");
+                    size = 8;
                     break;
+
             }
 
-            cmb_size.Items.Clear();
-            cmb_size.Items.AddRange(modeList.ToArray());
-            cmb_size.Enabled = true;
+            return size;
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
